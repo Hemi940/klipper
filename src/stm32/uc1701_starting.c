@@ -344,18 +344,33 @@ void UC1701_Show(void)
 {
   char *line0 = "BIQU-Hurakan";
   char *line1 = "Starting...";
-  char *line2 = "mcu: v0.10.0-20220609";
+  char *line3 = "OS Card must inserted";
+  char *line4 = "before power on";
+  char *line5 = "OS will start up";
+  char *line6 = "45s after power on";
+  char *line7 = "mcu: v0.10.0-20220609";
+
   uint8_t pixel;
 
   pixel = (128 - strlen(line0) * 6) / 2;
-  UC1701_setCursor(pixel, 2);
+  UC1701_setCursor(pixel, 0);
   UC1701_string((uint8_t*)line0);
   pixel = (128 - strlen(line1) * 6) / 2;
-  UC1701_setCursor(pixel, 4);
+  UC1701_setCursor(pixel, 1);
   UC1701_string((uint8_t*)line1);
-  pixel = (128 - strlen(line2) * 6) / 2;
+
+  UC1701_setCursor(0, 3);
+  UC1701_string((uint8_t*)line3);
+  UC1701_setCursor(0, 4);
+  UC1701_string((uint8_t*)line4);
+  UC1701_setCursor(0, 5);
+  UC1701_string((uint8_t*)line5);
+  UC1701_setCursor(0, 6);
+  UC1701_string((uint8_t*)line6);
+
+  pixel = (128 - strlen(line7) * 6) / 2;
   UC1701_setCursor(pixel, 7);
-  UC1701_string((uint8_t*)line2);
+  UC1701_string((uint8_t*)line7);
 }
 
 void BIQU_HurakanStarting(void)
