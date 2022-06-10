@@ -143,11 +143,11 @@ usb_request_bootloader(void)
  * Startup
  ****************************************************************/
 
+#include "uc1701_starting.h"
 // Main entry point - called from armcm_boot.c:ResetHandler()
 void
 armcm_main(void)
 {
-    check_usb_dfu_bootloader();
     SCB->VTOR = (uint32_t)VectorTable;
 
     // Reset clock registers (in case bootloader has changed them)
@@ -164,11 +164,15 @@ armcm_main(void)
     RCC->APBENR1 = 0x00000000;
     RCC->APBENR2 = 0x00000000;
 
+    check_usb_dfu_bootloader();
+
     // Set flash latency
     FLASH->ACR = (2<<FLASH_ACR_LATENCY_Pos) | FLASH_ACR_ICEN | FLASH_ACR_PRFTEN;
 
     // Configure main clock
     clock_setup();
+
+    BIQU_HurakanStarting();
 
     sched_main();
 }
